@@ -99,8 +99,9 @@ namespace NHibernate.Spatial.Type
             {
                 return null;
             }
-
-            PostGisReader reader = new PostGisReader();
+            
+            var factory = new GeometryFactory(new PrecisionModel(), 4326);
+            PostGisReader reader = new PostGisReader(factory);
             IGeometry geometry = reader.Read(bytes);
             this.SetDefaultSRID(geometry);
             return geometry;
